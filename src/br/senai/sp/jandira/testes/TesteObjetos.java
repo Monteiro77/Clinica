@@ -6,6 +6,7 @@ import javax.swing.JOptionPane;
 import javax.swing.plaf.basic.BasicInternalFrameTitlePane.TitlePaneLayout;
 
 import br.senai.sp.jandira.AgendaApp;
+import br.senai.sp.jandira.dao.EspecialidadeDAO;
 import br.senai.sp.jandira.model.Especialidade;
 import br.senai.sp.jandira.model.PlanoDeSaude;
 
@@ -13,26 +14,62 @@ public class TesteObjetos {
 
     public static void main(String[] args) {
 
+        EspecialidadeDAO dao = new EspecialidadeDAO();
+
         Especialidade e1 = new Especialidade("Cardiologia");
         // e1.setNome("Cardiologia");
         e1.setDescricao("Cuida do coração");
+        EspecialidadeDAO.gravar(e1);
 
         Especialidade e2 = new Especialidade("Gastroentrelogia");
         // e2.setNome("Gastroentrelogia");
         e2.setDescricao("Cuida do estamago");
-
-        // JOptionPane.showMessageDialog(null, e1);
+        EspecialidadeDAO.gravar(e2);
+        
+        
         Especialidade e3 = new Especialidade();
         e3.setNome("Qualquer coisa");
+        EspecialidadeDAO.gravar(e3);
         
         Especialidade e4 = new Especialidade();
         e4.setNome("Ginecologista");
+        EspecialidadeDAO.gravar(e4);
         
-         Especialidade e5 = new Especialidade();
-        e4.setNome("Medicologia");
+        Especialidade e5 = new Especialidade();
+        e5.setNome("Medicologia");
+        EspecialidadeDAO.gravar(e5);
         
+        for (Especialidade ee : dao.getEspecialidades()){
+            System.out.println(ee.getNome() + " - " + ee.getCodigo());
+        }
+       
         
+        EspecialidadeDAO.excluir(102);
+        System.out.println("");
+        System.out.println("");
+        for (Especialidade ee : dao.getEspecialidades()){
+            System.out.println(ee.getNome() + " - " + ee.getCodigo());
+        }
         
+        System.out.println("---------------AQUI----------------");
+        Especialidade procurada = EspecialidadeDAO.getEspecialidade(103);
+        System.out.println(procurada.getNome());
+        
+        System.out.println("---------------UPDATE----------------");
+        Especialidade especialidadeAtualizada = new Especialidade();
+        especialidadeAtualizada.setCodigo(104);
+        especialidadeAtualizada.setNome("Medicão");
+        especialidadeAtualizada.setDescricao("Cuida de tudo, ele é o cara!");
+        EspecialidadeDAO.atualizar(especialidadeAtualizada);
+       
+        System.out.println("");
+        System.out.println("----------------NOVO RESULTADO----------------");
+         Especialidade procurada2 = EspecialidadeDAO.getEspecialidade(104);
+        System.out.println(procurada2.getNome());
+        System.out.println(procurada2.getDescricao());
+        
+       
+
         // JOptionPane.showMessageDialog(null, e1.getNome());
         ArrayList<Especialidade> especialidades = new ArrayList<>();
         especialidades.add(e1);
@@ -41,12 +78,12 @@ public class TesteObjetos {
         especialidades.add(e4);
         especialidades.add(e5);
         System.out.println(especialidades.size());
-        
+
         //Exibir o numero de especialidades até agora
         System.out.println("numero do contador " + e1.getContador());
         System.out.println(e1.getCodigo() + "-" + e1.getNome());
         System.out.println(e2.getCodigo() + "-" + e2.getNome());
-        System.out.println(e3.getCodigo() + "-" + e3.getNome());    
+        System.out.println(e3.getCodigo() + "-" + e3.getNome());
         System.out.println(e4.getCodigo() + "-" + e4.getNome());
         System.out.println(e5.getCodigo() + "-" + e5.getNome());
 
@@ -103,8 +140,7 @@ public class TesteObjetos {
         System.out.println();
 
         System.out.println("Numeros de planos de saúdes " + PlanoDeSaude.getQuantidade());
-        
-        
+
     }
 
 }
