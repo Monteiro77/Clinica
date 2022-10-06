@@ -4,6 +4,11 @@
  */
 package br.senai.sp.jandira.ui;
 
+import br.senai.sp.jandira.dao.EspecialidadeDAO;
+import java.awt.Toolkit;
+import javax.swing.table.DefaultTableModel;
+import javax.tools.Tool;
+
 /**
  *
  * @author 22282226
@@ -15,6 +20,9 @@ public class HomeFrame extends javax.swing.JFrame {
      */
     public HomeFrame() {
         initComponents();
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/br/senai/sp/jandira/img/agenda.png")));
+        preencherTabela();
+        
     }
 
     /**
@@ -35,8 +43,18 @@ public class HomeFrame extends javax.swing.JFrame {
         buttonEspecialistas = new javax.swing.JButton();
         buttonPlanoDeSaude = new javax.swing.JButton();
         buttonSair = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        table = new javax.swing.JTable();
+        buttonCancelar = new javax.swing.JButton();
+        buttonEditar = new javax.swing.JButton();
+        buttonAdcionar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Sistema de agendamento");
+        setBackground(new java.awt.Color(255, 255, 255));
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setResizable(false);
         getContentPane().setLayout(null);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -56,35 +74,46 @@ public class HomeFrame extends javax.swing.JFrame {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
-                .addContainerGap(375, Short.MAX_VALUE))
+                .addContainerGap(374, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(21, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(19, 19, 19))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(30, 30, 30))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(31, 31, 31)
+                        .addComponent(jLabel2)))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel1);
         jPanel1.setBounds(0, 0, 800, 90);
 
+        buttonAgenda.setBackground(new java.awt.Color(255, 255, 255));
+        buttonAgenda.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        buttonAgenda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/senai/sp/jandira/img/sair.png"))); // NOI18N
         buttonAgenda.setText("Sair");
         buttonAgenda.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 255), 2));
         getContentPane().add(buttonAgenda);
         buttonAgenda.setBounds(710, 100, 80, 50);
 
-        buttonPacientes.setText("Agenda");
-        buttonPacientes.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 255), 2));
+        buttonPacientes.setBackground(new java.awt.Color(255, 255, 255));
+        buttonPacientes.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        buttonPacientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/senai/sp/jandira/img/agenda2.png"))); // NOI18N
+        buttonPacientes.setText("Agendar");
+        buttonPacientes.setToolTipText("Novo agendamento");
+        buttonPacientes.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 255), 2));
         getContentPane().add(buttonPacientes);
         buttonPacientes.setBounds(10, 100, 110, 50);
 
+        buttonMedicos.setBackground(new java.awt.Color(255, 255, 255));
+        buttonMedicos.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        buttonMedicos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/senai/sp/jandira/img/plano-de-saude.png"))); // NOI18N
         buttonMedicos.setText("Planos de Saúde");
+        buttonMedicos.setToolTipText("Planos de Saúde");
         buttonMedicos.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 255), 2));
         buttonMedicos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -92,67 +121,112 @@ public class HomeFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(buttonMedicos);
-        buttonMedicos.setBounds(490, 100, 120, 50);
+        buttonMedicos.setBounds(510, 100, 140, 50);
 
-        buttonEspecialistas.setText("Especialistas");
+        buttonEspecialistas.setBackground(new java.awt.Color(255, 255, 255));
+        buttonEspecialistas.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        buttonEspecialistas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/senai/sp/jandira/img/medico2.png"))); // NOI18N
+        buttonEspecialistas.setText("Especialidades");
+        buttonEspecialistas.setToolTipText("Lista de especialidades disponíveis");
         buttonEspecialistas.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 255), 2));
         getContentPane().add(buttonEspecialistas);
-        buttonEspecialistas.setBounds(370, 100, 110, 50);
+        buttonEspecialistas.setBounds(370, 100, 130, 50);
 
+        buttonPlanoDeSaude.setBackground(new java.awt.Color(255, 255, 255));
+        buttonPlanoDeSaude.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        buttonPlanoDeSaude.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/senai/sp/jandira/img/doctor.png"))); // NOI18N
         buttonPlanoDeSaude.setText("Médicos");
+        buttonPlanoDeSaude.setToolTipText("Médicos");
         buttonPlanoDeSaude.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 255), 2));
         getContentPane().add(buttonPlanoDeSaude);
         buttonPlanoDeSaude.setBounds(250, 100, 110, 50);
 
+        buttonSair.setBackground(new java.awt.Color(255, 255, 255));
+        buttonSair.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        buttonSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/senai/sp/jandira/img/sneezing.png"))); // NOI18N
         buttonSair.setText("Pacientes");
+        buttonSair.setToolTipText("Lista de pacientes");
         buttonSair.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 255), 2));
         getContentPane().add(buttonSair);
         buttonSair.setBounds(130, 100, 110, 50);
 
-        setBounds(0, 0, 816, 468);
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Lista de especialidade", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(51, 51, 255))); // NOI18N
+        jPanel2.setToolTipText("Lista de especialidades\n");
+        jPanel2.setLayout(new java.awt.GridLayout(1, 0));
+
+        table.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane3.setViewportView(table);
+
+        jPanel2.add(jScrollPane3);
+
+        getContentPane().add(jPanel2);
+        jPanel2.setBounds(10, 160, 780, 210);
+
+        buttonCancelar.setBackground(new java.awt.Color(255, 255, 255));
+        buttonCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/senai/sp/jandira/img/cancelar.png"))); // NOI18N
+        buttonCancelar.setToolTipText("Cancelar");
+        buttonCancelar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 0, 51), 1, true));
+        buttonCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonCancelarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(buttonCancelar);
+        buttonCancelar.setBounds(570, 380, 62, 40);
+
+        buttonEditar.setBackground(new java.awt.Color(255, 255, 255));
+        buttonEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/senai/sp/jandira/img/editar (1).png"))); // NOI18N
+        buttonEditar.setToolTipText("Editar");
+        buttonEditar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 0)));
+        buttonEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonEditarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(buttonEditar);
+        buttonEditar.setBounds(640, 380, 63, 41);
+
+        buttonAdcionar.setBackground(new java.awt.Color(255, 255, 255));
+        buttonAdcionar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/senai/sp/jandira/img/plus.png"))); // NOI18N
+        buttonAdcionar.setToolTipText("adcionar");
+        buttonAdcionar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 255, 0)));
+        getContentPane().add(buttonAdcionar);
+        buttonAdcionar.setBounds(710, 380, 60, 40);
+
+        setSize(new java.awt.Dimension(819, 476));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void buttonMedicosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonMedicosActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_buttonMedicosActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(HomeFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(HomeFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(HomeFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(HomeFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+    private void buttonEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEditarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_buttonEditarActionPerformed
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new HomeFrame().setVisible(true);
-            }
-        });
-    }
+    private void buttonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCancelarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_buttonCancelarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton buttonAdcionar;
     private javax.swing.JButton buttonAgenda;
+    private javax.swing.JButton buttonCancelar;
+    private javax.swing.JButton buttonEditar;
     private javax.swing.JButton buttonEspecialistas;
     private javax.swing.JButton buttonMedicos;
     private javax.swing.JButton buttonPacientes;
@@ -161,5 +235,29 @@ public class HomeFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JTable table;
     // End of variables declaration//GEN-END:variables
+
+    private void  preencherTabela(){
+        String[][] dados = {
+            {"100", "São Paulo", "SP"},    
+            {"200", "Itapevi", "SP"},    
+            {"300", "Cotia", "SP"},
+            {"400", "Barueri", "SP"},
+            {"500", "Curitiba", "PR"},
+            {"600", "Fortaleza", "CE"},
+    };
+        String[] titulos = {"CODIGO", "NOME DAS CIDADES", "SIGLAS" };
+        
+        DefaultTableModel modelo = new DefaultTableModel(dados, titulos);
+         
+        
+                
+                }
+        
+       
+        
+
 }

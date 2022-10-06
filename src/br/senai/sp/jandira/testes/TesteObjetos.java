@@ -14,6 +14,45 @@ public class TesteObjetos {
 
     public static void main(String[] args) {
 
+        int[] a = {2, 5, 67, 5, 7, 6, 1, 4, 5, 7, 8};
+        int[] b = new int[5];
+
+        int[][] c = {
+            {457, 984, 681},
+            {679, 123, 333, 444},
+            {555, 777, 981, 222}
+        };
+
+        String[][] quitanda = {
+            {"Banana", "Abacaxi", "Limão"},
+            {"Alface", "Couve", "Pepino", "Salsinha", "Pimentão", "Brocolis"},
+            {"Abacate", "tomate", "Jiló", "Abobrinha"}
+        };
+
+        System.out.println(quitanda[1][2]);
+
+        System.out.println("--------------------------------");
+
+        int[][][] teste = {
+            {
+                {6, 8, 3},
+                 {0, 9, 7},
+                 {12, 5, 8},
+                 {4, 0, 2}
+            },
+            {
+                {4, 5, 6},
+                 {2, 2, 2},
+                 {8, 7, 9},
+                 {7, 5, 3}
+            }
+        };
+        
+        System.out.println(teste[1][1][1]);
+
+        System.out.println(c[1][0]);
+        System.out.println("-------------------------------------------------------------------------");
+
         EspecialidadeDAO dao = new EspecialidadeDAO();
 
         Especialidade e1 = new Especialidade("Cardiologia");
@@ -25,50 +64,46 @@ public class TesteObjetos {
         // e2.setNome("Gastroentrelogia");
         e2.setDescricao("Cuida do estamago");
         EspecialidadeDAO.gravar(e2);
-        
-        
+
         Especialidade e3 = new Especialidade();
         e3.setNome("Qualquer coisa");
         EspecialidadeDAO.gravar(e3);
-        
+
         Especialidade e4 = new Especialidade();
         e4.setNome("Ginecologista");
         EspecialidadeDAO.gravar(e4);
-        
+
         Especialidade e5 = new Especialidade();
         e5.setNome("Medicologia");
         EspecialidadeDAO.gravar(e5);
-        
-        for (Especialidade ee : dao.getEspecialidades()){
+
+        for (Especialidade ee : dao.getEspecialidades()) {
             System.out.println(ee.getNome() + " - " + ee.getCodigo());
         }
-       
-        
+
         EspecialidadeDAO.excluir(102);
         System.out.println("");
         System.out.println("");
-        for (Especialidade ee : dao.getEspecialidades()){
+        for (Especialidade ee : dao.getEspecialidades()) {
             System.out.println(ee.getNome() + " - " + ee.getCodigo());
         }
-        
+
         System.out.println("---------------AQUI----------------");
         Especialidade procurada = EspecialidadeDAO.getEspecialidade(103);
         System.out.println(procurada.getNome());
-        
+
         System.out.println("---------------UPDATE----------------");
         Especialidade especialidadeAtualizada = new Especialidade();
         especialidadeAtualizada.setCodigo(104);
         especialidadeAtualizada.setNome("Medicão");
         especialidadeAtualizada.setDescricao("Cuida de tudo, ele é o cara!");
         EspecialidadeDAO.atualizar(especialidadeAtualizada);
-       
+
         System.out.println("");
         System.out.println("----------------NOVO RESULTADO----------------");
-         Especialidade procurada2 = EspecialidadeDAO.getEspecialidade(104);
+        Especialidade procurada2 = EspecialidadeDAO.getEspecialidade(104);
         System.out.println(procurada2.getNome());
         System.out.println(procurada2.getDescricao());
-        
-       
 
         // JOptionPane.showMessageDialog(null, e1.getNome());
         ArrayList<Especialidade> especialidades = new ArrayList<>();
