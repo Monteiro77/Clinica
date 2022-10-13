@@ -67,7 +67,7 @@ public class EspecialidadeDAO {
 
     public static DefaultTableModel getTabelaEspecialidades() {
 
-        String[] titulo = {"Código", "Nome da operadora", "Descrição"};
+        String[] titulo = {"Código", "Nome da especilidade", "Descrição"};
         String[][] dados = new String[especialidades.size()][3];
         
         

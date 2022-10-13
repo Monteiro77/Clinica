@@ -58,7 +58,7 @@ public class Especialidade {
         if (descricao.length() >= 10) {
             this.descricao = descricao;
         } else {
-            JOptionPane.showMessageDialog(null, descricao + " não é uma descrição valida, ela deve conter pelo menos 10 letras ou mais");
+            JOptionPane.showMessageDialog(null, descricao + " Não é uma descrição valida, ela deve conter pelo menos 10 letras ou mais");
 
         }
     }

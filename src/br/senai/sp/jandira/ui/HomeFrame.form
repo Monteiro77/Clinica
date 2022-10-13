@@ -147,6 +147,9 @@
           </Border>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonPacientesActionPerformed"/>
+      </Events>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
           <AbsoluteConstraints x="10" y="100" width="60" height="50"/>
@@ -257,6 +260,9 @@
           </Border>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonSairActionPerformed"/>
+      </Events>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
           <AbsoluteConstraints x="80" y="100" width="60" height="50"/>
@@ -323,7 +329,7 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="33" red="33" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="SISACON"/>
+            <Property name="text" type="java.lang.String" value="30 NO COMANDO"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="labelSistemaParaAgendamentoDeSistema">
@@ -377,7 +383,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="labelSite">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Site : sisacon.com.br"/>
+            <Property name="text" type="java.lang.String" value="Site : 30praum.com.br"/>
           </Properties>
         </Component>
       </SubComponents>

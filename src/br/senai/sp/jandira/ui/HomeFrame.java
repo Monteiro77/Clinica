@@ -1,6 +1,7 @@
 package br.senai.sp.jandira.ui;
 
 import br.senai.sp.jandira.dao.EspecialidadeDAO;
+import java.awt.Color;
 import java.awt.Toolkit;
 import javax.swing.table.DefaultTableModel;
 import javax.tools.Tool;
@@ -100,6 +101,11 @@ public class HomeFrame extends javax.swing.JFrame {
         buttonPacientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/senai/sp/jandira/img/agenda2.png"))); // NOI18N
         buttonPacientes.setToolTipText("Novo agendamento");
         buttonPacientes.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 255), 2));
+        buttonPacientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonPacientesActionPerformed(evt);
+            }
+        });
         getContentPane().add(buttonPacientes);
         buttonPacientes.setBounds(10, 100, 60, 50);
 
@@ -142,12 +148,17 @@ public class HomeFrame extends javax.swing.JFrame {
         buttonSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/senai/sp/jandira/img/sneezing.png"))); // NOI18N
         buttonSair.setToolTipText("Lista de pacientes");
         buttonSair.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 255), 2));
+        buttonSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonSairActionPerformed(evt);
+            }
+        });
         getContentPane().add(buttonSair);
         buttonSair.setBounds(80, 100, 60, 50);
 
         labelSisacon.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         labelSisacon.setForeground(new java.awt.Color(51, 51, 255));
-        labelSisacon.setText("SISACON");
+        labelSisacon.setText("30 NO COMANDO");
 
         labelSistemaParaAgendamentoDeSistema.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         labelSistemaParaAgendamentoDeSistema.setText("Sistema para Agendamento de Consultas");
@@ -173,7 +184,7 @@ public class HomeFrame extends javax.swing.JFrame {
 
         labelTelefone.setText("Telefone: 4002-8922");
 
-        labelSite.setText("Site : sisacon.com.br");
+        labelSite.setText("Site : 30praum.com.br");
 
         javax.swing.GroupLayout panelHomeLayout = new javax.swing.GroupLayout(panelHome);
         panelHome.setLayout(panelHomeLayout);
@@ -233,13 +244,15 @@ public class HomeFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void buttonMedicosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonMedicosActionPerformed
-        // TODO add your handling code here:
+       
     }//GEN-LAST:event_buttonMedicosActionPerformed
 
     private void buttonEspecialidadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEspecialidadesActionPerformed
         
         panelEspecialidades.setVisible(true);
         panelHome.setVisible(false);
+        
+        
         
     }//GEN-LAST:event_buttonEspecialidadesActionPerformed
 
@@ -248,7 +261,16 @@ public class HomeFrame extends javax.swing.JFrame {
         panelEspecialidades.setVisible(false);
         panelHome.setVisible(true);
         
+        
     }//GEN-LAST:event_buttonHomeActionPerformed
+
+    private void buttonPacientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPacientesActionPerformed
+        
+    }//GEN-LAST:event_buttonPacientesActionPerformed
+
+    private void buttonSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSairActionPerformed
+        
+    }//GEN-LAST:event_buttonSairActionPerformed
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
