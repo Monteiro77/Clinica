@@ -70,7 +70,7 @@ public class HomeFrame extends javax.swing.JFrame {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(375, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -93,6 +93,11 @@ public class HomeFrame extends javax.swing.JFrame {
         buttonAgenda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/senai/sp/jandira/img/sair.png"))); // NOI18N
         buttonAgenda.setText("Sair");
         buttonAgenda.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 255), 2));
+        buttonAgenda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonAgendaActionPerformed(evt);
+            }
+        });
         getContentPane().add(buttonAgenda);
         buttonAgenda.setBounds(710, 100, 80, 50);
 
@@ -239,7 +244,7 @@ public class HomeFrame extends javax.swing.JFrame {
         getContentPane().add(buttonHome);
         buttonHome.setBounds(360, 100, 60, 50);
 
-        setSize(new java.awt.Dimension(819, 476));
+        setSize(new java.awt.Dimension(816, 476));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -271,6 +276,10 @@ public class HomeFrame extends javax.swing.JFrame {
     private void buttonSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSairActionPerformed
         
     }//GEN-LAST:event_buttonSairActionPerformed
+
+    private void buttonAgendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAgendaActionPerformed
+        
+    }//GEN-LAST:event_buttonAgendaActionPerformed
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
