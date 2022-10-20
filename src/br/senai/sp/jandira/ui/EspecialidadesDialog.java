@@ -2,34 +2,48 @@ package br.senai.sp.jandira.ui;
 
 import br.senai.sp.jandira.dao.EspecialidadeDAO;
 import br.senai.sp.jandira.model.Especialidade;
+import br.senai.sp.jandira.model.OperacaoEnum;
 import javax.swing.JOptionPane;
 
 public class EspecialidadesDialog extends javax.swing.JDialog {
-
-    Especialidade especialidade;
-
-    public EspecialidadesDialog(java.awt.Frame parent,
-            boolean modal) {
-        super(parent, modal);
-        initComponents();
-
-    }
-
+    
+    private OperacaoEnum operacao;
+    private Especialidade especialidade;
+    
     public EspecialidadesDialog(java.awt.Frame parent,
             boolean modal,
-            Especialidade e) {
+            OperacaoEnum operacao) {
+        super(parent, modal);
+        initComponents();
+        this.operacao = operacao;
+        
+        preencherTitulo();
+    }
+    
+    public EspecialidadesDialog(java.awt.Frame parent,
+            boolean modal,
+            Especialidade e,
+            OperacaoEnum operacao) {
         super(parent, modal);
         
+        this.operacao = operacao;
         especialidade = e;
         initComponents();
         preencherFormulario();
+        preencherTitulo();
     }
-
+    
     private void preencherFormulario() {
-        labelTitulo.setText("Especialidades - Editar");
         textCodigo.setText(especialidade.getCodigo().toString());
         textNomedaEspecialidade.setText(especialidade.getNome());
         textDesricao.setText(especialidade.getDescricao());
+    }
+    
+    private void preencherTitulo() {
+        labelTitulo.setText("Especialidades - " + operacao);
+        
+        
+            
     }
 
     @SuppressWarnings("unchecked")
@@ -55,10 +69,10 @@ public class EspecialidadesDialog extends javax.swing.JDialog {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(null);
 
-        labelTitulo.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        labelTitulo.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         labelTitulo.setText("Especialidade - Adcionar");
         jPanel1.add(labelTitulo);
-        labelTitulo.setBounds(80, 20, 282, 40);
+        labelTitulo.setBounds(80, 20, 490, 40);
 
         labelIconAdcionar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/senai/sp/jandira/img/add.png"))); // NOI18N
         jPanel1.add(labelIconAdcionar);
@@ -78,23 +92,22 @@ public class EspecialidadesDialog extends javax.swing.JDialog {
 
         textCodigo.setEditable(false);
         jPanel2.add(textCodigo);
-        textCodigo.setBounds(30, 50, 60, 20);
+        textCodigo.setBounds(30, 50, 60, 22);
         jPanel2.add(textNomedaEspecialidade);
-        textNomedaEspecialidade.setBounds(30, 100, 290, 20);
+        textNomedaEspecialidade.setBounds(30, 100, 290, 22);
 
         labelNomeDaEspecialidae.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         labelNomeDaEspecialidae.setText("Nome da Especialiade");
         jPanel2.add(labelNomeDaEspecialidae);
         labelNomeDaEspecialidae.setBounds(30, 80, 120, 16);
         jPanel2.add(textDesricao);
-        textDesricao.setBounds(30, 150, 290, 20);
+        textDesricao.setBounds(30, 150, 290, 22);
 
         labelDescricao.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         labelDescricao.setText("Descrição");
         jPanel2.add(labelDescricao);
         labelDescricao.setBounds(30, 130, 60, 16);
 
-        buttonSalvar.setBackground(new java.awt.Color(255, 255, 255));
         buttonSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/senai/sp/jandira/img/save.png"))); // NOI18N
         buttonSalvar.setToolTipText("Salvar");
         buttonSalvar.addActionListener(new java.awt.event.ActionListener() {
@@ -105,7 +118,6 @@ public class EspecialidadesDialog extends javax.swing.JDialog {
         jPanel2.add(buttonSalvar);
         buttonSalvar.setBounds(480, 200, 60, 50);
 
-        buttonCancelar.setBackground(new java.awt.Color(255, 255, 255));
         buttonCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/senai/sp/jandira/img/cancelar.png"))); // NOI18N
         buttonCancelar.setToolTipText("Cancelar");
         buttonCancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -117,17 +129,38 @@ public class EspecialidadesDialog extends javax.swing.JDialog {
         buttonCancelar.setBounds(410, 200, 60, 50);
 
         getContentPane().add(jPanel2);
-        jPanel2.setBounds(0, 80, 580, 280);
+        jPanel2.setBounds(0, 80, 580, 290);
 
         setSize(new java.awt.Dimension(598, 398));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void buttonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCancelarActionPerformed
-
-    }//GEN-LAST:event_buttonCancelarActionPerformed
-
     private void buttonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSalvarActionPerformed
+        if (operacao == OperacaoEnum.ADCIONAR) {
+            adicionar();
+        } else {
+            editar();
+        }
+    }//GEN-LAST:event_buttonSalvarActionPerformed
+
+    private void buttonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCancelarActionPerformed
+        dispose();        
+    }//GEN-LAST:event_buttonCancelarActionPerformed
+    
+    private void editar() {
+        especialidade.setNome(textNomedaEspecialidade.getText());
+        especialidade.setDescricao(textDesricao.getText());
+        
+        EspecialidadeDAO.atualizar(especialidade);
+        
+        JOptionPane.showMessageDialog(null,
+                "Especialidade atualizada com sucesso",
+                "Atualizar Especialidade",
+                JOptionPane.OK_OPTION);
+        dispose();
+    }
+
+    private void adicionar() {
         //Criar um objeto especialidade
         Especialidade especialidade = new Especialidade();
         especialidade.setNome(textNomedaEspecialidade.getText());
@@ -135,31 +168,15 @@ public class EspecialidadesDialog extends javax.swing.JDialog {
 
         //Gravar Especialidade atravez do DAO
         EspecialidadeDAO.gravar(especialidade);
-
+        
         JOptionPane.showMessageDialog(null,
                 "Especialidade gravada com sucesso",
                 "Especialidade computada",
                 JOptionPane.INFORMATION_MESSAGE);
-
-        dispose();
-    }//GEN-LAST:event_buttonSalvarActionPerformed
-
-   
-    public static void main(String args[]) {
         
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                EspecialidadesDialog dialog = new EspecialidadesDialog(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
+        dispose();
     }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonCancelar;

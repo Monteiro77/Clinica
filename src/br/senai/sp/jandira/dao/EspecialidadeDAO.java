@@ -12,14 +12,14 @@ public class EspecialidadeDAO {
      */
     private static ArrayList<Especialidade> especialidades = new ArrayList<>();
 
-    public static void gravar(Especialidade e) {
-        especialidades.add(e);
-    }
-
+    
     public static ArrayList<Especialidade> getEspecialidades() {
         return especialidades;
     }
-
+    public static void gravar(Especialidade e) {
+        especialidades.add(e);
+    }
+    
     public static Especialidade getEspecialidade(Integer codigo) {
         for (Especialidade e : especialidades) {
             if (e.getCodigo() == codigo) {
@@ -32,9 +32,6 @@ public class EspecialidadeDAO {
     public static void atualizar(Especialidade especialidadeAtualizada) {//UPDATE
         for (Especialidade e : especialidades) {
             if (e.getCodigo() == especialidadeAtualizada.getCodigo()) {
-                //e = especialidadeAtualizada;
-                //especialidades.remove(e);
-                //especialidades.add(especialidadeAtualizada);
                 especialidades.set(especialidades.indexOf(e), especialidadeAtualizada);
                 break;
             }

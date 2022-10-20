@@ -9,11 +9,15 @@ public class PlanoDeSaude {
     private String categoria;
     private LocalDate validade;
     private String numero;
+    private String codigo;
     private static int quantidade;
 
     //criar construtores
-    public PlanoDeSaude(String operadora) {
+    public PlanoDeSaude(String operadora, String categoria, LocalDate validade, String numero) {
         this.operadora = operadora;
+        this.numero = numero;
+        this.validade = validade;
+        this.categoria = categoria;
         this.quantidade++;
     }
 
@@ -57,5 +61,14 @@ public class PlanoDeSaude {
     public static int getQuantidade() {
         return quantidade;
     }
+
+    public String getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
+    }
+  
 
 }

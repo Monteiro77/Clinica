@@ -2,6 +2,7 @@ package br.senai.sp.jandira.ui;
 
 import br.senai.sp.jandira.dao.EspecialidadeDAO;
 import br.senai.sp.jandira.model.Especialidade;
+import br.senai.sp.jandira.model.OperacaoEnum;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -49,7 +50,7 @@ public class PanelEspecialidades extends javax.swing.JPanel {
                 {null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Numero", "Operadora", "Categoria", "Validade"
             }
         ));
         jScrollPane3.setViewportView(tableEspecialidades);
@@ -59,7 +60,6 @@ public class PanelEspecialidades extends javax.swing.JPanel {
         add(jPanel2);
         jPanel2.setBounds(0, 0, 780, 200);
 
-        buttonExcluir.setBackground(new java.awt.Color(255, 255, 255));
         buttonExcluir.setForeground(new java.awt.Color(153, 153, 255));
         buttonExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/senai/sp/jandira/img/cancelar.png"))); // NOI18N
         buttonExcluir.setToolTipText("Excluir");
@@ -72,7 +72,6 @@ public class PanelEspecialidades extends javax.swing.JPanel {
         add(buttonExcluir);
         buttonExcluir.setBounds(580, 210, 50, 40);
 
-        buttonEditar.setBackground(new java.awt.Color(255, 255, 255));
         buttonEditar.setForeground(new java.awt.Color(153, 153, 255));
         buttonEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/senai/sp/jandira/img/editar (1).png"))); // NOI18N
         buttonEditar.setToolTipText("Editar");
@@ -85,7 +84,6 @@ public class PanelEspecialidades extends javax.swing.JPanel {
         add(buttonEditar);
         buttonEditar.setBounds(640, 210, 50, 40);
 
-        buttonAdcionar.setBackground(new java.awt.Color(255, 255, 255));
         buttonAdcionar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/senai/sp/jandira/img/plus.png"))); // NOI18N
         buttonAdcionar.setToolTipText("Adcionar");
         buttonAdcionar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 153, 255), 2, true));
@@ -139,14 +137,14 @@ public class PanelEspecialidades extends javax.swing.JPanel {
 
         Especialidade especialidade = EspecialidadeDAO.getEspecialidade(getCodigo());
         
-        EspecialidadesDialog especialidadeDialog = new EspecialidadesDialog(null, true);
+        EspecialidadesDialog especialidadeDialog = new EspecialidadesDialog(null, true, especialidade, OperacaoEnum.EDITAR);
         especialidadeDialog.setVisible(true);
         preencherTabela();
     }
     
 
     private void buttonAdcionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAdcionarActionPerformed
-        EspecialidadesDialog especialidadesDialog = new EspecialidadesDialog(null, true);
+        EspecialidadesDialog especialidadesDialog = new EspecialidadesDialog(null, true, OperacaoEnum.ADCIONAR);
         especialidadesDialog.setVisible(true);
         preencherTabela();
 
@@ -184,6 +182,6 @@ private void preencherTabela() {
         tableEspecialidades.getColumnModel().getColumn(0).setPreferredWidth(100);
         tableEspecialidades.getColumnModel().getColumn(1).setPreferredWidth(200);
         tableEspecialidades.getColumnModel().getColumn(2).setPreferredWidth(467);
-    }
+        }
 
 }
