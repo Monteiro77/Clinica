@@ -9,8 +9,10 @@ public class PlanoDeSaude {
     private String categoria;
     private LocalDate validade;
     private String numero;
-    private String codigo;
+    private Integer codigo = 0001;
     private static int quantidade;
+    
+    
 
     //criar construtores
     public PlanoDeSaude(String operadora, String categoria, LocalDate validade, String numero) {
@@ -19,6 +21,7 @@ public class PlanoDeSaude {
         this.validade = validade;
         this.categoria = categoria;
         this.quantidade++;
+        
     }
 
     public PlanoDeSaude() {
@@ -62,11 +65,11 @@ public class PlanoDeSaude {
         return quantidade;
     }
 
-    public String getCodigo() {
+    public Integer getCodigo() {
         return codigo;
     }
 
-    public void setCodigo(String codigo) {
+    public void setCodigo(Integer codigo) {
         this.codigo = codigo;
     }
   

@@ -14,6 +14,10 @@ public class PlanoDeSaudeDAO {
     public static ArrayList<PlanoDeSaude> getPlanoDeSaude() {
         return planoDeSaude;
     }
+    
+    public static void gravar(PlanoDeSaude e){
+        planoDeSaude.add(e);
+    }
 
     public static PlanoDeSaude getEspecialidade(String numero) {
         for (PlanoDeSaude e : planoDeSaude) {

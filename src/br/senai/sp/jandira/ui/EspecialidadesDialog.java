@@ -157,7 +157,7 @@ public class EspecialidadesDialog extends javax.swing.JDialog {
                 "Especialidade atualizada com sucesso",
                 "Atualizar Especialidade",
                 JOptionPane.OK_OPTION);
-        dispose();
+//        dispose();
     }
 
     private void adicionar() {

@@ -2,6 +2,7 @@
 package br.senai.sp.jandira.ui;
 
 import br.senai.sp.jandira.dao.PlanoDeSaudeDAO;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 
 public class PanelPlanoDeSaude extends javax.swing.JPanel {
@@ -55,7 +56,7 @@ public class PanelPlanoDeSaude extends javax.swing.JPanel {
         panelPlanoDeSaude.setLayout(null);
 
         panelListaPlanoDeSaude.setBackground(new java.awt.Color(255, 255, 255));
-        panelListaPlanoDeSaude.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Lista de Planos de Saude", 0, 0, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(51, 51, 255))); // NOI18N
+        panelListaPlanoDeSaude.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Lista de Planos de Saude", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(51, 51, 255))); // NOI18N
         panelListaPlanoDeSaude.setToolTipText("Lista de especialidades\n");
         panelListaPlanoDeSaude.setLayout(null);
 
@@ -119,9 +120,30 @@ public class PanelPlanoDeSaude extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void buttonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonExcluirActionPerformed
-       
+        linha = tablePlanoDeSaude.getSelectedRow();
+        
+        if (getLinha() != -1) {
+            excluirEspecialidade(linha);
+        } else {
+            JOptionPane.showMessageDialog(this,
+                    "Por favor, selecione a especialidade que você deseja excluir",
+                    "Atenção", JOptionPane.WARNING_MESSAGE);
+        }
+        
     }//GEN-LAST:event_buttonExcluirActionPerformed
+    private void excluirPlanoDeSaude(int linha) {
 
+        int resposta = JOptionPane.showConfirmDialog(this,
+                "Você confirma a exclusão?",
+                "Atenção",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE);
+
+        if (resposta == 0) {
+            PlanoDeSaudeDAO.excluir(getCodigo());
+            preencherTabela();
+        }
+    }
     private void buttonEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEditarActionPerformed
    
     }//GEN-LAST:event_buttonEditarActionPerformed

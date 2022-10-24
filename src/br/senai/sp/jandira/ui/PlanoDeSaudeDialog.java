@@ -1,13 +1,34 @@
 package br.senai.sp.jandira.ui;
 
+import br.senai.sp.jandira.dao.PlanoDeSaudeDAO;
+import br.senai.sp.jandira.model.OperacaoEnum;
+import br.senai.sp.jandira.model.PlanoDeSaude;
+import javax.swing.JOptionPane;
+
+
 
 public class PlanoDeSaudeDialog extends javax.swing.JDialog {
+    
+    private OperacaoEnum operacao;
+    private PlanoDeSaude planoDeSaude;
 
-    public PlanoDeSaudeDialog(java.awt.Frame parent, boolean modal) {
+    public PlanoDeSaudeDialog(java.awt.Frame parent,
+            boolean modal) {
         super(parent, modal);
         initComponents();
+        
+        preencherTitulo();
     }
-
+    
+    
+    private void preencherFormulario() {
+        
+    }
+    
+    private void preencherTitulo() {
+       labelTitulo.setText("Plano De Saude - " + operacao);
+    }
+                
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -29,6 +50,7 @@ public class PlanoDeSaudeDialog extends javax.swing.JDialog {
         buttonCancelar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
         getContentPane().setLayout(null);
 
         panelTitulo.setBackground(new java.awt.Color(255, 255, 255));
@@ -125,14 +147,50 @@ public class PlanoDeSaudeDialog extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void buttonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSalvarActionPerformed
-       
+       if (operacao == OperacaoEnum.ADCIONAR) {
+            adicionar();
+        } else {
+            editar();
+        }
     }//GEN-LAST:event_buttonSalvarActionPerformed
 
     private void buttonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCancelarActionPerformed
         dispose();
     }//GEN-LAST:event_buttonCancelarActionPerformed
 
+    private void editar() {
+        planoDeSaude.setOperadora(fieldOperadora.getText());
+        planoDeSaude.setCategoria(fieldCategoria.getText());
+        planoDeSaude.setNumero(fieldNumero.getText());
+        planoDeSaude.setValidade(planoDeSaude.getValidade());
+        
+        PlanoDeSaudeDAO.atualizar(planoDeSaude);
+        
+        JOptionPane.showMessageDialog(null,
+                "Plano de saúde atualizado com sucesso",
+                "Atualizar plano de saúde",
+                JOptionPane.OK_OPTION);
+        dispose();
+    }
     
+    private void adicionar() {
+        //Criar um objeto especialidade
+        PlanoDeSaude planoDeSaude = new PlanoDeSaude();
+        planoDeSaude.setOperadora(planoDeSaude.getOperadora());
+        planoDeSaude.setCategoria(planoDeSaude.getCategoria());
+        planoDeSaude.setNumero(planoDeSaude.getNumero());
+        planoDeSaude.setValidade(planoDeSaude.getValidade());
+
+        //Gravar Especialidade atravez do DAO
+        PlanoDeSaudeDAO.gravar(planoDeSaude);
+        
+        JOptionPane.showMessageDialog(null,
+                "Plano de saúde gravado com sucesso",
+                "Plano de Saude computado",
+                JOptionPane.INFORMATION_MESSAGE);
+        
+        dispose();
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonCancelar;
     private javax.swing.JButton buttonSalvar;
