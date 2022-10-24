@@ -42,8 +42,6 @@ public class EspecialidadesDialog extends javax.swing.JDialog {
     private void preencherTitulo() {
         labelTitulo.setText("Especialidades - " + operacao);
         
-        
-            
     }
 
     @SuppressWarnings("unchecked")
@@ -165,6 +163,7 @@ public class EspecialidadesDialog extends javax.swing.JDialog {
         Especialidade especialidade = new Especialidade();
         especialidade.setNome(textNomedaEspecialidade.getText());
         especialidade.setDescricao(textDesricao.getText());
+        
 
         //Gravar Especialidade atravez do DAO
         EspecialidadeDAO.gravar(especialidade);

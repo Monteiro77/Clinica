@@ -7,6 +7,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+
 public class PanelEspecialidades extends javax.swing.JPanel {
 
     private int linha;
@@ -99,8 +100,8 @@ public class PanelEspecialidades extends javax.swing.JPanel {
     private void buttonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonExcluirActionPerformed
         linha = tableEspecialidades.getSelectedRow();
 
-        if (getLinha() != -1) {
-            excluirEspecialidade(linha);
+            if (getLinha() != -1) {
+            excluirEspecialidade();
         } else {
             JOptionPane.showMessageDialog(this,
                     "Por favor, selecione a especialidade que você deseja excluir",
@@ -109,7 +110,7 @@ public class PanelEspecialidades extends javax.swing.JPanel {
 
     }//GEN-LAST:event_buttonExcluirActionPerformed
 
-    private void excluirEspecialidade(int linha) {
+    private void excluirEspecialidade() {
 
         int resposta = JOptionPane.showConfirmDialog(this,
                 "Você confirma a exclusão?",

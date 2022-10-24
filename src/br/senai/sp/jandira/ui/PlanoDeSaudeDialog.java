@@ -13,15 +13,35 @@ public class PlanoDeSaudeDialog extends javax.swing.JDialog {
     private PlanoDeSaude planoDeSaude;
 
     public PlanoDeSaudeDialog(java.awt.Frame parent,
-            boolean modal) {
+            boolean modal,
+            OperacaoEnum operacao) {
+        super(parent, modal);
+        
+        initComponents();
+        preencherTitulo();
+    }
+        public PlanoDeSaudeDialog(java.awt.Frame parent,
+            boolean modal,
+            PlanoDeSaude p,
+            OperacaoEnum operacao) {
         super(parent, modal);
         initComponents();
         
+        this.operacao = operacao;
+        planoDeSaude = p;
         preencherTitulo();
+        preencherFormulario();
     }
     
     
+    
     private void preencherFormulario() {
+        fieldNumero.setText(fieldNumero.getText());
+        fieldOperadora.setText(planoDeSaude.getOperadora());
+        fieldCategoria.setText(planoDeSaude.getCategoria());
+        spinnerDia.setValue(spinnerDia.getValue().toString());
+        spinnerMes.setValue(spinnerMes.getValue().toString());
+        spinnerAno.setValue(spinnerAno.getValue().toString());
         
     }
     
@@ -42,12 +62,17 @@ public class PlanoDeSaudeDialog extends javax.swing.JDialog {
         labelNumero = new javax.swing.JLabel();
         labelCategoria = new javax.swing.JLabel();
         labelValidade = new javax.swing.JLabel();
-        fieldValidade = new javax.swing.JTextField();
         fieldNumero = new javax.swing.JTextField();
         fieldOperadora = new javax.swing.JTextField();
         fieldCategoria = new javax.swing.JTextField();
         buttonSalvar = new javax.swing.JButton();
         buttonCancelar = new javax.swing.JButton();
+        labelDia = new javax.swing.JLabel();
+        labelMes = new javax.swing.JLabel();
+        spinnerAno = new javax.swing.JSpinner();
+        spinnerDia = new javax.swing.JSpinner();
+        spinnerMes = new javax.swing.JSpinner();
+        labelAno = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -110,8 +135,6 @@ public class PlanoDeSaudeDialog extends javax.swing.JDialog {
         labelValidade.setText("Valídade");
         panelDetalhes.add(labelValidade);
         labelValidade.setBounds(50, 220, 60, 16);
-        panelDetalhes.add(fieldValidade);
-        fieldValidade.setBounds(50, 240, 200, 22);
         panelDetalhes.add(fieldNumero);
         fieldNumero.setBounds(50, 60, 60, 22);
         panelDetalhes.add(fieldOperadora);
@@ -139,6 +162,33 @@ public class PlanoDeSaudeDialog extends javax.swing.JDialog {
         panelDetalhes.add(buttonCancelar);
         buttonCancelar.setBounds(410, 200, 60, 50);
 
+        labelDia.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        labelDia.setText("Dia");
+        panelDetalhes.add(labelDia);
+        labelDia.setBounds(60, 270, 30, 16);
+
+        labelMes.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        labelMes.setText("Mês");
+        panelDetalhes.add(labelMes);
+        labelMes.setBounds(120, 270, 30, 16);
+
+        spinnerAno.setModel(new javax.swing.SpinnerNumberModel(2022, 2022, 2050, 1));
+        panelDetalhes.add(spinnerAno);
+        spinnerAno.setBounds(170, 240, 70, 20);
+
+        spinnerDia.setModel(new javax.swing.SpinnerNumberModel(1, 1, 31, 1));
+        panelDetalhes.add(spinnerDia);
+        spinnerDia.setBounds(50, 240, 50, 20);
+
+        spinnerMes.setModel(new javax.swing.SpinnerNumberModel(1, 1, 12, 1));
+        panelDetalhes.add(spinnerMes);
+        spinnerMes.setBounds(110, 240, 50, 20);
+
+        labelAno.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        labelAno.setText("Ano");
+        panelDetalhes.add(labelAno);
+        labelAno.setBounds(190, 270, 37, 16);
+
         getContentPane().add(panelDetalhes);
         panelDetalhes.setBounds(0, 80, 580, 340);
 
@@ -161,7 +211,6 @@ public class PlanoDeSaudeDialog extends javax.swing.JDialog {
     private void editar() {
         planoDeSaude.setOperadora(fieldOperadora.getText());
         planoDeSaude.setCategoria(fieldCategoria.getText());
-        planoDeSaude.setNumero(fieldNumero.getText());
         planoDeSaude.setValidade(planoDeSaude.getValidade());
         
         PlanoDeSaudeDAO.atualizar(planoDeSaude);
@@ -178,8 +227,9 @@ public class PlanoDeSaudeDialog extends javax.swing.JDialog {
         PlanoDeSaude planoDeSaude = new PlanoDeSaude();
         planoDeSaude.setOperadora(planoDeSaude.getOperadora());
         planoDeSaude.setCategoria(planoDeSaude.getCategoria());
-        planoDeSaude.setNumero(planoDeSaude.getNumero());
         planoDeSaude.setValidade(planoDeSaude.getValidade());
+        
+        
 
         //Gravar Especialidade atravez do DAO
         PlanoDeSaudeDAO.gravar(planoDeSaude);
@@ -197,14 +247,19 @@ public class PlanoDeSaudeDialog extends javax.swing.JDialog {
     private javax.swing.JTextField fieldCategoria;
     private javax.swing.JTextField fieldNumero;
     private javax.swing.JTextField fieldOperadora;
-    private javax.swing.JTextField fieldValidade;
+    private javax.swing.JLabel labelAno;
     private javax.swing.JLabel labelCategoria;
+    private javax.swing.JLabel labelDia;
     private javax.swing.JLabel labelIcon;
+    private javax.swing.JLabel labelMes;
     private javax.swing.JLabel labelNumero;
     private javax.swing.JLabel labelOperadora;
     private javax.swing.JLabel labelTitulo;
     private javax.swing.JLabel labelValidade;
     private javax.swing.JPanel panelDetalhes;
     private javax.swing.JPanel panelTitulo;
+    private javax.swing.JSpinner spinnerAno;
+    private javax.swing.JSpinner spinnerDia;
+    private javax.swing.JSpinner spinnerMes;
     // End of variables declaration//GEN-END:variables
 }

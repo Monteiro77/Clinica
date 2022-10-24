@@ -5,27 +5,34 @@ import java.time.LocalDateTime;
 
 public class PlanoDeSaude {
 
+    public static int contador = 10100;
     private String operadora;
     private String categoria;
     private LocalDate validade;
-    private String numero;
-    private Integer codigo = 0001;
+    
+    private Integer codigo ;
     private static int quantidade;
     
     
 
     //criar construtores
-    public PlanoDeSaude(String operadora, String categoria, LocalDate validade, String numero) {
+    public PlanoDeSaude(String operadora, String categoria, LocalDate validade) {
         this.operadora = operadora;
-        this.numero = numero;
         this.validade = validade;
         this.categoria = categoria;
         this.quantidade++;
+        gerarCodigo();
         
     }
 
     public PlanoDeSaude() {
         this.quantidade++;
+        gerarCodigo();
+    }
+    
+    public void gerarCodigo(){
+        this.contador++;
+        this.codigo = contador;
     }
 
     //Setter and getters
@@ -52,15 +59,7 @@ public class PlanoDeSaude {
     public LocalDate getValidade() {
         return validade;
     }
-
-    public void setNumero(String numero) {
-        this.numero = numero;
-    }
-
-    public String getNumero() {
-        return numero;
-    }
-
+    
     public static int getQuantidade() {
         return quantidade;
     }
@@ -72,6 +71,9 @@ public class PlanoDeSaude {
     public void setCodigo(Integer codigo) {
         this.codigo = codigo;
     }
-  
 
+    public static int getContador() {
+        return contador;
+    }
+    
 }
