@@ -145,7 +145,7 @@ public class PanelEspecialidades extends javax.swing.JPanel {
     
 
     private void buttonAdcionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAdcionarActionPerformed
-        EspecialidadesDialog especialidadesDialog = new EspecialidadesDialog(null, true, OperacaoEnum.ADCIONAR);
+        EspecialidadesDialog especialidadesDialog = new EspecialidadesDialog(null, true, OperacaoEnum.ADICIONAR);
         especialidadesDialog.setVisible(true);
         preencherTabela();
 
@@ -154,7 +154,7 @@ public class PanelEspecialidades extends javax.swing.JPanel {
     private Integer getCodigo() {
         String codigoStr = tableEspecialidades.getValueAt(getLinha(), 0).toString();
         Integer codigo = Integer.valueOf(codigoStr);
-        return codigo;
+        return codigo;  
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

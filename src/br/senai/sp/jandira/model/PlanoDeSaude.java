@@ -2,6 +2,7 @@ package br.senai.sp.jandira.model;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class PlanoDeSaude {
 
@@ -9,24 +10,27 @@ public class PlanoDeSaude {
     private String operadora;
     private String categoria;
     private LocalDate validade;
-    
     private Integer codigo ;
-    private static int quantidade;
+    private String numero; 
+    private DateTimeFormatter formatador;
+    private String dataFormatada;
+    
     
     
 
     //criar construtores
-    public PlanoDeSaude(String operadora, String categoria, LocalDate validade) {
+    public PlanoDeSaude(String operadora, String categoria, LocalDate validade,String numero) {
         this.operadora = operadora;
         this.validade = validade;
         this.categoria = categoria;
-        this.quantidade++;
+        this.numero = numero;
+        
         gerarCodigo();
         
     }
 
     public PlanoDeSaude() {
-        this.quantidade++;
+        
         gerarCodigo();
     }
     
@@ -60,10 +64,6 @@ public class PlanoDeSaude {
         return validade;
     }
     
-    public static int getQuantidade() {
-        return quantidade;
-    }
-
     public Integer getCodigo() {
         return codigo;
     }
@@ -75,5 +75,22 @@ public class PlanoDeSaude {
     public static int getContador() {
         return contador;
     }
+
+    public String getNumero() {
+        return numero;
+    }
+
+    public void setNumero(String numero) {
+        this.numero = numero;
+    }
+
+    public String getDataFormatada() {
+        return dataFormatada;
+    }
+
+    public void setDataFormatada(String dataFormatada) {
+        this.dataFormatada = dataFormatada;
+    }
+    
     
 }

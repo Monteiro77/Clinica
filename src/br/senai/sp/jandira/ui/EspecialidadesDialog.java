@@ -134,7 +134,7 @@ public class EspecialidadesDialog extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void buttonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSalvarActionPerformed
-        if (operacao == OperacaoEnum.ADCIONAR) {
+        if (operacao == OperacaoEnum.ADICIONAR) {
             adicionar();
         } else {
             editar();

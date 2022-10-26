@@ -104,9 +104,8 @@ public class PanelPlanoDeSaude extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void buttonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonExcluirActionPerformed
-        linha = tablePlanoDeSaude.getSelectedRow();
-        
-        if ((getLinha()) != -1) {
+ 
+        if (getLinha() != -1) {
             excluirPlanoDeSaude();
         } else {
             JOptionPane.showMessageDialog(this,
@@ -128,6 +127,8 @@ public class PanelPlanoDeSaude extends javax.swing.JPanel {
             PlanoDeSaudeDAO.excluir(getCodigo());
             preencherTabela();
         }
+        
+        
     }
     private void buttonEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEditarActionPerformed
         if(getLinha() != -1){
@@ -144,12 +145,12 @@ public class PanelPlanoDeSaude extends javax.swing.JPanel {
         preencherTabela();
     }
     private void buttonAdcionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAdcionarActionPerformed
-        PlanoDeSaudeDialog tela = new PlanoDeSaudeDialog(null, true, OperacaoEnum.ADCIONAR);
+        PlanoDeSaudeDialog tela = new PlanoDeSaudeDialog(null, true, OperacaoEnum.ADICIONAR);
         tela.setVisible(true);
         preencherTabela();
     }//GEN-LAST:event_buttonAdcionarActionPerformed
     private Integer getCodigo() {
-       String codigoStr = tablePlanoDeSaude.getValueAt(getLinha(), 0).toString();
+        String codigoStr = tablePlanoDeSaude.getValueAt(getLinha(), 0).toString();
         Integer codigo = Integer.valueOf(codigoStr);
         return codigo;
     }
@@ -179,10 +180,11 @@ public class PanelPlanoDeSaude extends javax.swing.JPanel {
 
         //definir largura das colunas
         tablePlanoDeSaude.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-        tablePlanoDeSaude.getColumnModel().getColumn(0).setPreferredWidth(200);
-        tablePlanoDeSaude.getColumnModel().getColumn(1).setPreferredWidth(200);
-        tablePlanoDeSaude.getColumnModel().getColumn(2).setPreferredWidth(250);
-        tablePlanoDeSaude.getColumnModel().getColumn(3).setPreferredWidth(117);
+        tablePlanoDeSaude.getColumnModel().getColumn(0).setPreferredWidth(100);
+        tablePlanoDeSaude.getColumnModel().getColumn(1).setPreferredWidth(150);
+        tablePlanoDeSaude.getColumnModel().getColumn(2).setPreferredWidth(147);
+        tablePlanoDeSaude.getColumnModel().getColumn(3).setPreferredWidth(190);
+        tablePlanoDeSaude.getColumnModel().getColumn(4).setPreferredWidth(180);
     }
     
 
