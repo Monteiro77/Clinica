@@ -200,7 +200,7 @@ public class PlanoDeSaudeDialog extends javax.swing.JDialog {
         planoDeSaude.setOperadora(fieldOperadora.getText());
         planoDeSaude.setCategoria(fieldCategoria.getText());
         planoDeSaude.setDataFormatada(formattedTextFieldValidade.getText());
-        planoDeSaude.setNumero(fieldCodigo.getText());
+        planoDeSaude.setNumero(fieldNumero.getText());
         
         PlanoDeSaudeDAO.atualizar(planoDeSaude);
         
@@ -211,8 +211,14 @@ public class PlanoDeSaudeDialog extends javax.swing.JDialog {
         dispose();
     }
     
-    private void adicionar() {
-        //Criar um objeto especialidade
+    private void adicionar(){
+        
+        CharSequence branco = " ";
+        //Espaços em branco
+        if(formattedTextFieldValidade.getText().contains(branco) == true || fieldNumero.getText().contains(branco) || fieldOperadora.getText().isEmpty()){
+            JOptionPane.showMessageDialog(this, "Os campos, operadora, categoria e validade precisam estar preenchidos", "Atenção", JOptionPane.INFORMATION_MESSAGE);
+        }else{
+            //Criar um objeto especialidade
         PlanoDeSaude planoDeSaude = new PlanoDeSaude();
         planoDeSaude.setOperadora(planoDeSaude.getOperadora());
         planoDeSaude.setCategoria(planoDeSaude.getCategoria());
@@ -231,6 +237,8 @@ public class PlanoDeSaudeDialog extends javax.swing.JDialog {
                 JOptionPane.INFORMATION_MESSAGE);
         
         dispose();
+            
+        }
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonCancelar;
