@@ -18,6 +18,7 @@ public class PlanoDeSaudeDialog extends javax.swing.JDialog {
         super(parent, modal);
         
         initComponents();
+        this.operacao = operacao;
         preencherTitulo();
     }
         public PlanoDeSaudeDialog(java.awt.Frame parent,
@@ -174,8 +175,13 @@ public class PlanoDeSaudeDialog extends javax.swing.JDialog {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        formattedTextFieldValidade.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                formattedTextFieldValidadeActionPerformed(evt);
+            }
+        });
         panelDetalhes.add(formattedTextFieldValidade);
-        formattedTextFieldValidade.setBounds(50, 240, 50, 22);
+        formattedTextFieldValidade.setBounds(50, 240, 90, 22);
 
         getContentPane().add(panelDetalhes);
         panelDetalhes.setBounds(0, 80, 580, 310);
@@ -185,20 +191,39 @@ public class PlanoDeSaudeDialog extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void buttonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSalvarActionPerformed
-       if (operacao == OperacaoEnum.ADICIONAR) {
+     
+        if (operacao == OperacaoEnum.ADICIONAR) {
             adicionar();
         } else {
             editar();
         }
+        
     }//GEN-LAST:event_buttonSalvarActionPerformed
 
     private void buttonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCancelarActionPerformed
         dispose();
     }//GEN-LAST:event_buttonCancelarActionPerformed
 
+    private void formattedTextFieldValidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_formattedTextFieldValidadeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_formattedTextFieldValidadeActionPerformed
+
     private void editar() {
-        planoDeSaude.setOperadora(fieldOperadora.getText());
+        
+    
+        CharSequence branco = " ";
+        //Espaços em branco
+        if(formattedTextFieldValidade.getText().contains(branco) == true || fieldNumero.getText().isBlank() || fieldCategoria.getText().isBlank()|| fieldOperadora.getText().isBlank()){
+            JOptionPane.showMessageDialog(this,
+                    "Os campos, operadora, categoria e validade precisam estar preenchidos",
+                    "Atenção", 
+                    JOptionPane.INFORMATION_MESSAGE);
+        }else{
+            
+        
+        
         planoDeSaude.setCategoria(fieldCategoria.getText());
+        planoDeSaude.setOperadora(fieldOperadora.getText());
         planoDeSaude.setDataFormatada(formattedTextFieldValidade.getText());
         planoDeSaude.setNumero(fieldNumero.getText());
         
@@ -207,23 +232,27 @@ public class PlanoDeSaudeDialog extends javax.swing.JDialog {
         JOptionPane.showMessageDialog(null,
                 "Plano de saúde atualizado com sucesso",
                 "Atualizar plano de saúde",
-                JOptionPane.OK_OPTION);
+                JOptionPane.INFORMATION_MESSAGE);
         dispose();
+        }
     }
     
     private void adicionar(){
         
         CharSequence branco = " ";
         //Espaços em branco
-        if(formattedTextFieldValidade.getText().contains(branco) == true || fieldNumero.getText().contains(branco) || fieldOperadora.getText().isEmpty()){
-            JOptionPane.showMessageDialog(this, "Os campos, operadora, categoria e validade precisam estar preenchidos", "Atenção", JOptionPane.INFORMATION_MESSAGE);
+        if(formattedTextFieldValidade.getText().contains(branco) == true || fieldNumero.getText().contains(branco) || fieldCategoria.getText().isBlank() || fieldOperadora.getText().isBlank()){
+            JOptionPane.showMessageDialog(this,
+                    "Os campos, operadora, categoria e validade precisam estar preenchidos",
+                    "Atenção", 
+                    JOptionPane.INFORMATION_MESSAGE);
         }else{
             //Criar um objeto especialidade
         PlanoDeSaude planoDeSaude = new PlanoDeSaude();
-        planoDeSaude.setOperadora(planoDeSaude.getOperadora());
-        planoDeSaude.setCategoria(planoDeSaude.getCategoria());
+        planoDeSaude.setOperadora(fieldOperadora.getText());
+        planoDeSaude.setCategoria(fieldCategoria.getText());
         planoDeSaude.setDataFormatada(formattedTextFieldValidade.getText());
-        planoDeSaude.setNumero(planoDeSaude.getNumero());
+        planoDeSaude.setNumero(fieldNumero.getText());
         
         
         

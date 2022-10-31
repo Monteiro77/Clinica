@@ -20,6 +20,10 @@ public class PlanoDeSaude {
 
     //criar construtores
     public PlanoDeSaude(String operadora, String categoria, LocalDate validade,String numero) {
+         
+        formatador = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        dataFormatada = validade.format(formatador);
+        
         this.operadora = operadora;
         this.validade = validade;
         this.categoria = categoria;

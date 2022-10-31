@@ -79,7 +79,7 @@ public class PlanoDeSaudeDAO {
             dados[i][0] = p.getCodigo().toString();
             dados[i][1] = p.getOperadora();
             dados[i][2] = p.getCategoria();
-            dados[i][3] = p.getValidade().toString();
+            dados[i][3] = p.getDataFormatada();
             dados[i][4] = p.getNumero();
         i++;
         }

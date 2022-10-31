@@ -1,11 +1,8 @@
 package br.senai.sp.jandira.ui;
 
-import br.senai.sp.jandira.dao.EspecialidadeDAO;
-import br.senai.sp.jandira.dao.PlanoDeSaudeDAO;
-import java.awt.Color;
+
 import java.awt.Toolkit;
-import javax.swing.table.DefaultTableModel;
-import javax.tools.Tool;
+
 
 
 public class HomeFrame extends javax.swing.JFrame {
@@ -282,7 +279,7 @@ public class HomeFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonPacientesActionPerformed
 
     private void buttonSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSairActionPerformed
-        dispose();
+     
     }//GEN-LAST:event_buttonSairActionPerformed
 
     private void buttonAgendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAgendaActionPerformed

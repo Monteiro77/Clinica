@@ -127,23 +127,30 @@ public class PanelPlanoDeSaude extends javax.swing.JPanel {
             PlanoDeSaudeDAO.excluir(getCodigo());
             preencherTabela();
         }
-        
-        
     }
     private void buttonEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEditarActionPerformed
         if(getLinha() != -1){
             editarPlanoDeSaude();
         }else{
-            JOptionPane.showConfirmDialog(this, "Por favor, selecione a linha que deseja editar", "Edição", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this,
+                    "Por favor, selecione a linha que deseja editar",
+                    "Edição", 
+                    JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_buttonEditarActionPerformed
+    
     public void editarPlanoDeSaude() {
         PlanoDeSaude planoDeSaude = PlanoDeSaudeDAO.getPlanoDeSaude(getCodigo());
         
-        PlanoDeSaudeDialog planoDeSaudeDialog = new PlanoDeSaudeDialog(null, true, planoDeSaude, OperacaoEnum.EDITAR);
+        PlanoDeSaudeDialog planoDeSaudeDialog = new PlanoDeSaudeDialog(null,
+                true,
+                planoDeSaude,
+                OperacaoEnum.EDITAR);
+        
         planoDeSaudeDialog.setVisible(true);
         preencherTabela();
     }
+    
     private void buttonAdcionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAdcionarActionPerformed
         PlanoDeSaudeDialog tela = new PlanoDeSaudeDialog(null, true, OperacaoEnum.ADICIONAR);
         tela.setVisible(true);
