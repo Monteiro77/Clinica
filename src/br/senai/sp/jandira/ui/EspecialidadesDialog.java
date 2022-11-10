@@ -159,13 +159,6 @@ public class EspecialidadesDialog extends javax.swing.JDialog {
     }
 
     private void adicionar() {
-        CharSequence branco = " ";
-        if(textNomedaEspecialidade.getText().isEmpty() == true || textDesricao.getText().contains(branco)   ){
-            JOptionPane.showMessageDialog(this,
-                    "Os campos Especialidade e Descrição devem estar preenchidos",
-                    "Atenção", 
-                    JOptionPane.INFORMATION_MESSAGE);
-        }else{
         
         //Criar um objeto especialidade
         Especialidade especialidade = new Especialidade();
@@ -182,7 +175,7 @@ public class EspecialidadesDialog extends javax.swing.JDialog {
                 JOptionPane.INFORMATION_MESSAGE);
         
         dispose();
-        }
+        
     }
 
 

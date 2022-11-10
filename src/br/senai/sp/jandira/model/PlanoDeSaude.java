@@ -29,6 +29,7 @@ public class PlanoDeSaude {
         this.categoria = categoria;
         this.numero = numero;
         
+        
         gerarCodigo();
         
     }
@@ -95,6 +96,10 @@ public class PlanoDeSaude {
     public void setDataFormatada(String dataFormatada) {
         this.dataFormatada = dataFormatada;
     }
+    
+    public String getPlanoDeSaudeSeparadoComPontoEVirgula() {
+        return this.codigo + ";" + this.operadora + ";" + this.categoria + ";" + this.dataFormatada + ";" + this.numero;
+}
     
     
 }
