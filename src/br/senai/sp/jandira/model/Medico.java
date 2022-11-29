@@ -114,6 +114,10 @@ public class Medico {
     public static int getContador() {
         return contador;
     }
+
+    public void setDataFormatada(String dataFormatada) {
+        this.dataFormatada = dataFormatada;
+    }
     
     public String getDadosDoMedicoComPontoEVirgula() {
         return this.codigo + ";" + this.crm + ";" + this.nomeMedico + ";" + this.telefoneMedico + ";" + this.email + ";" + this.dataFormatada + "+" + this.especialidades;

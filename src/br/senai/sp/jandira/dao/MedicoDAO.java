@@ -140,7 +140,7 @@ public class MedicoDAO {
     
     
     public static DefaultTableModel getTabelaMedicos() {
-        String[] titulo = {"codigo","crm", "nome" , "telefone"};
+        String[] titulo = {"codigo","crm", "nome", "telefone"};
         
         String[][] dados = new String[medico.size()][4];
         

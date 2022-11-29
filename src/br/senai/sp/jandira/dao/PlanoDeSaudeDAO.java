@@ -43,7 +43,7 @@ public class PlanoDeSaudeDAO {
             escritor.close();
             
         } catch (IOException error) {
-            JOptionPane.showMessageDialog(null, "Ocorre um erro");
+            JOptionPane.showMessageDialog(null, "Ocorreu um erro");
         }
         
         

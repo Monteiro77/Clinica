@@ -213,7 +213,7 @@ public class PlanoDeSaudeDialog extends javax.swing.JDialog {
     
         CharSequence branco = " ";
         //Espaços em branco
-        if(formattedTextFieldValidade.getText().contains(branco) == true || fieldNumero.getText().isBlank() || fieldCategoria.getText().isBlank()|| fieldOperadora.getText().isBlank()){
+        if(formattedTextFieldValidade.getText().contains(branco) == true || fieldNumero.getText().contains(branco) || fieldCategoria.getText().contains(branco)|| fieldOperadora.getText().contains(branco)){
             JOptionPane.showMessageDialog(this,
                     "Os campos, operadora, categoria e validade precisam estar preenchidos",
                     "Atenção", 
@@ -241,7 +241,7 @@ public class PlanoDeSaudeDialog extends javax.swing.JDialog {
         
         CharSequence branco = " ";
         //Espaços em branco
-        if(formattedTextFieldValidade.getText().contains(branco) == true || fieldNumero.getText().contains(branco) || fieldCategoria.getText().isBlank() || fieldOperadora.getText().isBlank()){
+        if(formattedTextFieldValidade.getText().contains(branco) == true || fieldNumero.getText().contains(branco) || fieldCategoria.getText().contains(branco) || fieldOperadora.getText().contains(branco)){
             JOptionPane.showMessageDialog(this,
                     "Os campos, operadora, categoria e validade precisam estar preenchidos",
                     "Atenção", 
@@ -253,9 +253,6 @@ public class PlanoDeSaudeDialog extends javax.swing.JDialog {
         planoDeSaude.setCategoria(fieldCategoria.getText());
         planoDeSaude.setDataFormatada(formattedTextFieldValidade.getText());
         planoDeSaude.setNumero(fieldNumero.getText());
-        
-        
-        
 
         //Gravar Especialidade atravez do DAO
         PlanoDeSaudeDAO.gravar(planoDeSaude);

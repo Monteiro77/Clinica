@@ -148,7 +148,7 @@ public class PanelEspecialidades extends javax.swing.JPanel {
         EspecialidadesDialog especialidadesDialog = new EspecialidadesDialog(null, true, OperacaoEnum.ADICIONAR);
         especialidadesDialog.setVisible(true);
         preencherTabela();
-
+        
 
     }//GEN-LAST:event_buttonAdcionarActionPerformed
     private Integer getCodigo() {
