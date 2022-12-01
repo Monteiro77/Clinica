@@ -10,7 +10,9 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
+import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
+import javax.swing.ListModel;
 import javax.swing.table.DefaultTableModel;
 
 public class EspecialidadeDAO {
@@ -25,7 +27,16 @@ public class EspecialidadeDAO {
     public static ArrayList<Especialidade> getEspecialidades() {
         return especialidades;
     }
-
+    
+    public static Especialidade getEspecialidade(Integer codigo) {
+        for (Especialidade e : especialidades) {
+            if (e.getCodigo() == codigo) {
+                return e;
+            }
+        }
+        return null;
+    }
+    
     public static void gravar(Especialidade e) {
         especialidades.add(e);
 
@@ -45,15 +56,6 @@ public class EspecialidadeDAO {
             JOptionPane.showMessageDialog(null, "ocorrreu um erro");
         }
 
-    }
-
-    public static Especialidade getEspecialidade(Integer codigo) {
-        for (Especialidade e : especialidades) {
-            if (e.getCodigo() == codigo) {
-                return e;
-            }
-        }
-        return null;
     }
 
     public static void atualizar(Especialidade especialidadeAtualizada) {//UPDATE
@@ -150,6 +152,13 @@ public class EspecialidadeDAO {
         }
 
     }
+    public static DefaultListModel<Especialidade> getModelEsp(){
+        DefaultListModel<Especialidade> especialidadeLista = new DefaultListModel<Especialidade>();
+        for(Especialidade percorrer : getEspecialidades()){
+            especialidadeLista.addElement(percorrer);
+        }
+        return especialidadeLista;
+    }
 
     public static DefaultTableModel getTabelaEspecialidades() {
 
@@ -167,5 +176,7 @@ public class EspecialidadeDAO {
         return new DefaultTableModel(dados, titulo);
 
     }
+
+    
 
 }

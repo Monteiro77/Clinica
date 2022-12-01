@@ -8,6 +8,7 @@ public class Especialidade {
     private Integer codigo;
     private String nome;
     private String descricao;
+    
 
     //contrutores de classe
     public Especialidade(String nome) {
@@ -80,5 +81,9 @@ public class Especialidade {
     
     public String getEspecilaidadeSeparadaPorPontoEVirgula() {
         return this.codigo + ";" + this.nome + ";" + this.descricao;
+    }
+    
+    public String toString(){
+        return nome;
     }
 }

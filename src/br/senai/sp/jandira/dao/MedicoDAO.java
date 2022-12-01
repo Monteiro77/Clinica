@@ -1,5 +1,6 @@
 package br.senai.sp.jandira.dao;
 
+import br.senai.sp.jandira.model.Especialidade;
 import br.senai.sp.jandira.model.Medico;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -9,25 +10,27 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
-import java.time.LocalDate;
 import java.util.ArrayList;
+import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class MedicoDAO {
     
-    private final static String URL = "C:\\Users\\22282226\\eclipse-workspace\\Clinica\\Medico.txt";
+    private final static String URL = "C:\\Users\\22282226\\eclipse-workspace\\Clinica\\Medicos.txt";
     private final static String URL_TEMPORARIO = "C:\\Users\\22282226\\eclipse-workspace\\Clinica\\Medico-temporario.txt";
     private final static Path PATH = Paths.get(URL);
     private final static Path PATH_TEMPORARIO = Paths.get(URL_TEMPORARIO);
-    
-    
     
     //Classe com o objeetivo de persistir os dados 
     private static ArrayList<Medico> medico = new ArrayList<>();
     
     public static ArrayList<Medico> getMedico() {
         return medico;
+    }
+
+    public static Path getPATH() {
+        return PATH;
     }
     
     public static void gravar(Medico m){
@@ -43,8 +46,9 @@ public class MedicoDAO {
             escritor.write(m.getDadosDoMedicoComPontoEVirgula());
             escritor.newLine();
             escritor.close();
+            
         } catch (Exception error) {
-            JOptionPane.showMessageDialog(null, "Ocorre um erro");
+            error.printStackTrace(); 
         }
     }
     
@@ -107,6 +111,18 @@ public class MedicoDAO {
     
     }
     
+    public static ArrayList<Especialidade> separaCodigos(String linha) {
+        String[] vetor = linha.split(";");
+        
+        int codigoEspecialidade = 6;
+        
+        ArrayList<Especialidade> codigos = new ArrayList<>();
+        while (codigoEspecialidade < vetor.length){
+            codigos.add(EspecialidadeDAO.getEspecialidade(Integer.valueOf(vetor[codigoEspecialidade])));
+        }
+        return codigos;
+    }
+    
     public static void criarListaDeMedicos() {
         try {
             
@@ -120,9 +136,9 @@ public class MedicoDAO {
                 //Transformar dados da linha em um plano de saúde
                 String[] vetor = linha.split(";");
                 
-                String[] data = vetor[4].split("/");
+                
                  
-                Medico m = new Medico(Integer.valueOf(vetor[0]) ,vetor[1], vetor[2], vetor[3]);
+                Medico m = new Medico(Integer.valueOf(vetor[0]), vetor[1], vetor[2], vetor[3], vetor[4], vetor[5], separaCodigos(linha));
                 
                 medico.add(m);
                 
@@ -135,6 +151,25 @@ public class MedicoDAO {
             JOptionPane.showMessageDialog(null, "Ocorreu um erro ao gravar o arquivo");
         }
         
+    }
+    public static DefaultListModel<Especialidade> getEspecialidadeModel() {
+        
+        DefaultListModel<Especialidade> especialidadeLista = new DefaultListModel<Especialidade>();
+        
+        try {
+            BufferedReader leitor = Files.newBufferedReader(PATH);
+            
+            String linha = leitor.readLine();
+            
+            for(Especialidade percorrer : separaCodigos(linha)) {
+                especialidadeLista.addElement(percorrer);
+            }
+            
+        } catch (Exception error) {
+            JOptionPane.showMessageDialog(null,
+                    "Ocorreu um erro ao montar a lista do médico!");
+        }
+        return especialidadeLista;
     }
 
     
@@ -150,12 +185,16 @@ public class MedicoDAO {
             dados[i][1] = m.getCrm();
             dados[i][2] = m.getNomeMedico();
             dados[i][3] = m.getTelefoneMedico();
+            
+            
+            
             i++;
         }
         
         return new DefaultTableModel(dados, titulo);
     
     }
+
     
     
 }

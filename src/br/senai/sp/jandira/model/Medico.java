@@ -22,24 +22,29 @@ public class Medico {
     
     //Contrutores
     
-    public Medico(String crm, String nomeMedico, String telefoneMedico, String email, LocalDate dataDeNascimento,ArrayList<Especialidade> especialidades){
+    public Medico(String crm, String nomeMedico, String telefone, String email, LocalDate dataDeNascimento,ArrayList<Especialidade> especialidades){
         
           formatador = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         dataFormatada = dataDeNascimento.format(formatador);
         
         this.crm = crm;
         this.nomeMedico = nomeMedico;
-        this.telefoneMedico = telefoneMedico;
+        this.telefoneMedico = telefone;
         this.email = email;
         this.dataDeNascimento = dataDeNascimento;
         
         gerarCodigo();
     }
     
-    public Medico(Integer codigo, String crm, String nome, String telefone){
+    public Medico(Integer codigo, String crm, String nome, String telefone, String email, String dataDeNascimento,ArrayList<Especialidade> especialidades){
+        
         this.crm = crm;
         this.nomeMedico = nome;
         this.telefoneMedico = telefone;
+        this.email = email;
+        this.dataFormatada = dataDeNascimento;
+        this.especialidades = especialidades;
+    
         
         gerarCodigo();
    }
@@ -128,6 +133,7 @@ public class Medico {
         }
         
         return String.join(";", codigos);
+        
     }
     
     public String getDadosDoMedicoComPontoEVirgula() {
