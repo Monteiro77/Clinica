@@ -128,8 +128,8 @@ public class PanelMedico extends javax.swing.JPanel {
                 JOptionPane.YES_NO_OPTION,
                 JOptionPane.QUESTION_MESSAGE);
         if (resposta == 0) {
-            
-           
+            MedicoDAO.excluir(getCodigo());
+            preencherTabela();
         }
     }
     private void buttonEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEditarActionPerformed

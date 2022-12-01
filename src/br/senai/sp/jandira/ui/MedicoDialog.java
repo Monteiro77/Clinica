@@ -15,6 +15,8 @@ public class MedicoDialog extends javax.swing.JDialog {
     public MedicoDialog(java.awt.Frame parent, boolean modal,OperacaoEnum operacao) {
         super(parent, modal);
         initComponents();
+        this.operacao = operacao;
+        preencherTitulo();
     }
     
     public MedicoDialog(java.awt.Frame parent,
@@ -27,6 +29,7 @@ public class MedicoDialog extends javax.swing.JDialog {
         medico = m;
         initComponents();
         preencherFormulario();
+        preencherTitulo();
         
     }
     
@@ -36,6 +39,11 @@ public class MedicoDialog extends javax.swing.JDialog {
         fieldNomeDoMedico.setText(medico.getNomeMedico());
         
     }
+    
+    private void preencherTitulo() {
+        labelTitulo.setText("Medico" + operacao);
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {

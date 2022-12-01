@@ -2,13 +2,14 @@
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
 public class Medico {
 
     public static int contador = 709;
     private Integer codigo;
     private String nomeMedico;
-    private Especialidade[] especialidades;
+    private ArrayList<Especialidade> especialidades;
     private String telefoneMedico;
     private String email;
     private String crm;
@@ -18,9 +19,10 @@ public class Medico {
     
     
     
+    
     //Contrutores
     
-    public Medico(String crm, String nomeMedico, String telefoneMedico, String email, LocalDate dataDeNascimento){
+    public Medico(String crm, String nomeMedico, String telefoneMedico, String email, LocalDate dataDeNascimento,ArrayList<Especialidade> especialidades){
         
           formatador = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         dataFormatada = dataDeNascimento.format(formatador);
@@ -63,14 +65,14 @@ public class Medico {
         return nomeMedico;
     }
 
-    public void setEspecialidades(Especialidade[] especialidades) {
+    public void setEspecialidades(ArrayList<Especialidade> especialidades) {
         this.especialidades = especialidades;
     }
 
-    public Especialidade[] getEspecialidades() {
+    public ArrayList<Especialidade> getEspecialidades() {
         return especialidades;
     }
-
+    
     public void setTelefoneMedico(String telefoneMedico) {
         this.telefoneMedico = telefoneMedico;
     }
@@ -119,8 +121,25 @@ public class Medico {
         this.dataFormatada = dataFormatada;
     }
     
+    public String arrayParaString(ArrayList<Especialidade> array) {
+        ArrayList<String> codigos = new ArrayList<String>();
+        for(Especialidade e : array){
+            codigos.add(e.getCodigo().toString());
+        }
+        
+        return String.join(";", codigos);
+    }
+    
     public String getDadosDoMedicoComPontoEVirgula() {
-        return this.codigo + ";" + this.crm + ";" + this.nomeMedico + ";" + this.telefoneMedico + ";" + this.email + ";" + this.dataFormatada + "+" + this.especialidades;
+
+        return this.codigo + ";" 
+                + this.crm + ";" 
+                + this.nomeMedico + ";" 
+                + this.telefoneMedico + ";" 
+                + this.email 
+                + ";" + this.dataFormatada 
+                + ";" + arrayParaString(this.especialidades);
+        
      }
     
     
