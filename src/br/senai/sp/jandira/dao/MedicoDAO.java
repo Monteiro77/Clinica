@@ -10,6 +10,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
@@ -17,8 +18,8 @@ import javax.swing.table.DefaultTableModel;
 
 public class MedicoDAO {
     
-    private final static String URL = "C:\\Users\\22282226\\eclipse-workspace\\Clinica\\Medicos.txt";
-    private final static String URL_TEMPORARIO = "C:\\Users\\22282226\\eclipse-workspace\\Clinica\\Medico-temporario.txt";
+    private final static String URL = "C:\\Senai\\Clinica\\Medicos.txt";
+    private final static String URL_TEMPORARIO = "C:\\Senai\\Clinica\\Medico-temporario.txt";
     private final static Path PATH = Paths.get(URL);
     private final static Path PATH_TEMPORARIO = Paths.get(URL_TEMPORARIO);
     
@@ -62,9 +63,9 @@ public class MedicoDAO {
     }
     
     public static void atualizar(Medico MedicoAtualizado){
-        for(Medico m : medico){
-            if(m.getCodigo().equals(MedicoAtualizado.getCodigo())){
-                medico.set(medico.indexOf(0), MedicoAtualizado);
+        for(Medico i : medico){
+            if(i.getCodigo().equals(MedicoAtualizado.getCodigo())){
+                medico.set(medico.indexOf(i), MedicoAtualizado);
                 break;
             }
         }
@@ -111,7 +112,7 @@ public class MedicoDAO {
     
     }
     
-    public static ArrayList<Especialidade> separaCodigos(String linha) {
+    public static ArrayList<Especialidade> separarCodigos(String linha) {
         String[] vetor = linha.split(";");
         
         int codigoEspecialidade = 6;
@@ -119,26 +120,23 @@ public class MedicoDAO {
         ArrayList<Especialidade> codigos = new ArrayList<>();
         while (codigoEspecialidade < vetor.length){
             codigos.add(EspecialidadeDAO.getEspecialidade(Integer.valueOf(vetor[codigoEspecialidade])));
+            codigoEspecialidade++;
         }
         return codigos;
     }
     
     public static void criarListaDeMedicos() {
+        
         try {
-            
             BufferedReader leitor = Files.newBufferedReader(PATH);
             
             String linha = leitor.readLine();
-            
-           
             
             while(linha != null){
                 //Transformar dados da linha em um plano de saúde
                 String[] vetor = linha.split(";");
                 
-                
-                 
-                Medico m = new Medico(Integer.valueOf(vetor[0]), vetor[1], vetor[2], vetor[3], vetor[4], vetor[5], separaCodigos(linha));
+                Medico m = new Medico(vetor[2], vetor[3], vetor[4], vetor[1], vetor[5], Integer.valueOf(vetor[0]), separarCodigos(linha));
                 
                 medico.add(m);
                 
@@ -161,7 +159,7 @@ public class MedicoDAO {
             
             String linha = leitor.readLine();
             
-            for(Especialidade percorrer : separaCodigos(linha)) {
+            for(Especialidade percorrer : separarCodigos(linha)) {
                 especialidadeLista.addElement(percorrer);
             }
             
@@ -171,27 +169,28 @@ public class MedicoDAO {
         }
         return especialidadeLista;
     }
-
-    
     
     public static DefaultTableModel getTabelaMedicos() {
-        String[] titulo = {"codigo","crm", "nome", "telefone"};
+        String[] titulo = {"Codigo","CRM", "Nome", "Telefone"};
         
-        String[][] dados = new String[medico.size()][4];
+        String[][] dados = new String[medico.size()][6];
         
         int i = 0;
-        for(Medico m : medico) {
+        for(Medico m : medico){
             dados[i][0] = m.getCodigo().toString();
             dados[i][1] = m.getCrm();
             dados[i][2] = m.getNomeMedico();
             dados[i][3] = m.getTelefoneMedico();
-            
-            
-            
+            dados[i][4] = m.getEmail();
+            dados[i][5] = m.getDataFormatada();
             i++;
+            
+            
+            
         }
         
-        return new DefaultTableModel(dados, titulo);
+        DefaultTableModel model = new DefaultTableModel(dados, titulo);
+        return model;
     
     }
 

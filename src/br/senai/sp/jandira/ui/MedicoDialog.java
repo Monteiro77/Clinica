@@ -45,13 +45,13 @@ public class MedicoDialog extends javax.swing.JDialog {
     
     private void preencherFormulario() {
         fieldCodigo.setText(medico.getCodigo().toString());
-        fieldCRM.setText(medico.getCrm());
+        formattedCrm.setText(medico.getCrm());
         fieldNomeDoMedico.setText(medico.getNomeMedico());
         
     }
     
     private void preencherTitulo() {
-        labelTitulo.setText("Medico" + operacao);
+        labelTitulo.setText("Medico - " + operacao);
     }
     
     @SuppressWarnings("unchecked")
@@ -72,9 +72,7 @@ public class MedicoDialog extends javax.swing.JDialog {
         fieldNomeDoMedico = new javax.swing.JTextField();
         labelNomeDoMedico = new javax.swing.JLabel();
         formattedTextFieldDataDeNascimento = new javax.swing.JFormattedTextField();
-        fieldCRM = new javax.swing.JTextField();
         labelCRM = new javax.swing.JLabel();
-        fiedTelefone = new javax.swing.JTextField();
         labelTelefone = new javax.swing.JLabel();
         listEspecialidadesDoMedico = new javax.swing.JScrollPane();
         jListEspecialidadesDoMedico = new javax.swing.JList<>();
@@ -82,6 +80,8 @@ public class MedicoDialog extends javax.swing.JDialog {
         jListEspecialidades = new javax.swing.JList<>();
         buttonRemoverDaLista = new javax.swing.JButton();
         buttonAdicionarParaLista = new javax.swing.JButton();
+        formattedCrm = new javax.swing.JFormattedTextField();
+        formattedTelefone = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(null);
@@ -126,7 +126,6 @@ public class MedicoDialog extends javax.swing.JDialog {
         panelDetalhes.add(fieldEmail);
         fieldEmail.setBounds(170, 100, 180, 22);
 
-        buttonSalvar.setBackground(new java.awt.Color(255, 255, 255));
         buttonSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/senai/sp/jandira/img/save.png"))); // NOI18N
         buttonSalvar.setToolTipText("Salvar");
         buttonSalvar.addActionListener(new java.awt.event.ActionListener() {
@@ -137,7 +136,6 @@ public class MedicoDialog extends javax.swing.JDialog {
         panelDetalhes.add(buttonSalvar);
         buttonSalvar.setBounds(480, 200, 60, 50);
 
-        buttonCancelar1.setBackground(new java.awt.Color(255, 255, 255));
         buttonCancelar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/senai/sp/jandira/img/cancelar.png"))); // NOI18N
         buttonCancelar1.setToolTipText("Cancelar");
         buttonCancelar1.addActionListener(new java.awt.event.ActionListener() {
@@ -148,12 +146,12 @@ public class MedicoDialog extends javax.swing.JDialog {
         panelDetalhes.add(buttonCancelar1);
         buttonCancelar1.setBounds(410, 200, 60, 50);
         panelDetalhes.add(fieldNomeDoMedico);
-        fieldNomeDoMedico.setBounds(260, 40, 240, 22);
+        fieldNomeDoMedico.setBounds(210, 40, 240, 22);
 
         labelNomeDoMedico.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         labelNomeDoMedico.setText("Nome do médico");
         panelDetalhes.add(labelNomeDoMedico);
-        labelNomeDoMedico.setBounds(260, 20, 100, 16);
+        labelNomeDoMedico.setBounds(210, 20, 100, 16);
 
         formattedTextFieldDataDeNascimento.setColumns(8);
         try {
@@ -163,15 +161,11 @@ public class MedicoDialog extends javax.swing.JDialog {
         }
         panelDetalhes.add(formattedTextFieldDataDeNascimento);
         formattedTextFieldDataDeNascimento.setBounds(370, 100, 110, 22);
-        panelDetalhes.add(fieldCRM);
-        fieldCRM.setBounds(120, 40, 120, 22);
 
         labelCRM.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         labelCRM.setText("CRM");
         panelDetalhes.add(labelCRM);
         labelCRM.setBounds(120, 20, 50, 16);
-        panelDetalhes.add(fiedTelefone);
-        fiedTelefone.setBounds(20, 100, 130, 22);
 
         labelTelefone.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         labelTelefone.setText("Telefone");
@@ -207,6 +201,29 @@ public class MedicoDialog extends javax.swing.JDialog {
         });
         panelDetalhes.add(buttonAdicionarParaLista);
         buttonAdicionarParaLista.setBounds(180, 150, 60, 50);
+
+        formattedCrm.setColumns(4);
+        try {
+            formattedCrm.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        formattedCrm.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                formattedCrmActionPerformed(evt);
+            }
+        });
+        panelDetalhes.add(formattedCrm);
+        formattedCrm.setBounds(120, 40, 70, 22);
+
+        formattedTelefone.setColumns(11);
+        try {
+            formattedTelefone.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##)#####-####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        panelDetalhes.add(formattedTelefone);
+        formattedTelefone.setBounds(20, 100, 135, 22);
 
         getContentPane().add(panelDetalhes);
         panelDetalhes.setBounds(0, 80, 580, 310);
@@ -281,30 +298,66 @@ public class MedicoDialog extends javax.swing.JDialog {
                     JOptionPane.WARNING_MESSAGE, null);
          }
     }//GEN-LAST:event_buttonRemoverDaListaActionPerformed
-    private void editar(){
+
+    private void formattedCrmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_formattedCrmActionPerformed
         
+    }//GEN-LAST:event_formattedCrmActionPerformed
+    private void editar(){
+        CharSequence branco = " ";
+
+        // Espaços em branco
+        if (formattedCrm.getText().contains(branco) == true
+                || fieldNomeDoMedico.getText().isEmpty()
+                || formattedTelefone.getText().contains(branco) == true
+                || fieldEmail.getText().isEmpty()
+                || formattedTextFieldDataDeNascimento.getText().contains(branco) == true) {
+
+            JOptionPane.showMessageDialog(this,
+                    "Todos os campos são obrigatórios!!",
+                    "Atenção",
+                    JOptionPane.WARNING_MESSAGE);
+            formattedCrm.requestFocus();
+        } else {
+        
+        medico.setCrm(formattedCrm.getText());
         medico.setNomeMedico(fieldNomeDoMedico.getText());
-        medico.setTelefoneMedico(fiedTelefone.getText());
-        medico.setCrm(fieldCRM.getText());
+        medico.setTelefoneMedico(formattedTelefone.getText());
         medico.setEmail(fieldEmail.getText());
         medico.setDataFormatada(formattedTextFieldDataDeNascimento.getText());
-        medico.setEspecialidades(pegarEspecialidades(jListEspecialidadesDoMedico));
+        medico.setEspecialidades(pegarEspecialidades(jListEspecialidades));
         
         MedicoDAO.atualizar(medico);
         
         JOptionPane.showMessageDialog(null,
                 "Dados atualizados com sucesso!",
                 "Atualizar Medico",
-                JOptionPane.OK_OPTION);
+                JOptionPane.CLOSED_OPTION);
         
         dispose();
-    }
+            }
+        }
+        
     private void adicionar(){
+        CharSequence branco = " ";
+
+        // Espaços em branco
+        if (formattedCrm.getText().contains(branco) == true
+                || fieldNomeDoMedico.getText().isEmpty()
+                || formattedTelefone.getText().contains(branco) == true
+                || fieldEmail.getText().isEmpty()
+                || formattedTextFieldDataDeNascimento.getText().contains(branco) == true) {
+
+            JOptionPane.showMessageDialog(this,
+                    "Todos os campos são obrigatórios!!",
+                    "Atenção",
+                    JOptionPane.WARNING_MESSAGE);
+            formattedCrm.requestFocus();
+        } else {
         
         Medico medico = new Medico();
         medico.setNomeMedico(fieldNomeDoMedico.getText());
-        medico.setTelefoneMedico(fiedTelefone.getText());
-        medico.setCrm(fieldCRM.getText());
+        medico.setTelefoneMedico(formattedTelefone.getText());
+        medico.setCrm(formattedCrm.getText());
         medico.setEmail(fieldEmail.getText());
         medico.setDataFormatada(formattedTextFieldDataDeNascimento.getText());
         medico.setEspecialidades(pegarEspecialidades(jListEspecialidadesDoMedico));
@@ -317,6 +370,7 @@ public class MedicoDialog extends javax.swing.JDialog {
                 "Adcionar Médico",
                 JOptionPane.INFORMATION_MESSAGE);
         dispose();
+        }
     }
     private ArrayList<Especialidade> pegarEspecialidades(JList<Especialidade> lista) {
         int tamanho = lista.getModel().getSize();
@@ -340,7 +394,7 @@ public class MedicoDialog extends javax.swing.JDialog {
             String linha = leitor.readLine();
             
             DefaultListModel<Especialidade> medicoEspecialidades = new DefaultListModel<>();
-            for (Especialidade percorrer : MedicoDAO.separaCodigos(linha)){
+            for (Especialidade percorrer : MedicoDAO.separarCodigos(linha)){
                 medicoEspecialidades.addElement(percorrer);
             }
             jListEspecialidadesDoMedico.setModel(medicoEspecialidades);
@@ -355,11 +409,11 @@ public class MedicoDialog extends javax.swing.JDialog {
     private javax.swing.JButton buttonCancelar1;
     private javax.swing.JButton buttonRemoverDaLista;
     private javax.swing.JButton buttonSalvar;
-    private javax.swing.JTextField fiedTelefone;
-    private javax.swing.JTextField fieldCRM;
     private javax.swing.JTextField fieldCodigo;
     private javax.swing.JTextField fieldEmail;
     private javax.swing.JTextField fieldNomeDoMedico;
+    private javax.swing.JFormattedTextField formattedCrm;
+    private javax.swing.JFormattedTextField formattedTelefone;
     private javax.swing.JFormattedTextField formattedTextFieldDataDeNascimento;
     private javax.swing.JList<Especialidade> jListEspecialidades;
     private javax.swing.JList<Especialidade> jListEspecialidadesDoMedico;

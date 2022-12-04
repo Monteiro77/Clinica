@@ -17,12 +17,13 @@ import javax.swing.table.DefaultTableModel;
 
 public class EspecialidadeDAO {
 
-    private final static String URL = "C:\\Users\\22282226\\eclipse-workspace\\Clinica\\Especialidade.txt";
-    private final static String URL_TEMPORARIO = "C:\\Users\\22282226\\eclipse-workspace\\Clinica\\Especialidade-temp.txt";
+    private final static String URL = "C:\\Senai\\Clinica\\Especialidade.txt";
+    private final static String URL_TEMPORARIO = "C:\\Senai\\Clinica\\Especialidade-temp.txt";
     private final static Path PATH = Paths.get(URL);
     private final static Path PATH_TEMPORARIO = Paths.get(URL_TEMPORARIO);
 
     private static ArrayList<Especialidade> especialidades = new ArrayList<>();
+    private static ArrayList<String> especialidadesNomes = new ArrayList<>();
 
     public static ArrayList<Especialidade> getEspecialidades() {
         return especialidades;
@@ -30,7 +31,7 @@ public class EspecialidadeDAO {
     
     public static Especialidade getEspecialidade(Integer codigo) {
         for (Especialidade e : especialidades) {
-            if (e.getCodigo() == codigo) {
+            if (e.getCodigo().equals(codigo)) {
                 return e;
             }
         }
@@ -131,8 +132,8 @@ public class EspecialidadeDAO {
                 //transformar os dados da linha em uma especialidade
                 String[] vetor = linha.split(";");
                 Especialidade e = new Especialidade(
-                        vetor[2],
                         vetor[1],
+                        vetor[2],
                         Integer.valueOf(vetor[0]));
 
                 // Guardar a especialidade na lista

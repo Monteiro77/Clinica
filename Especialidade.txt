@@ -1,4 +1,4 @@
-100;tenbgoreou;bruogourhg
-101;fuwfgwieghpi;oergjrighwrihwr
-102;wgwrhgowrhiogwh;rghwiohgriohwriowrg
-103;wrkghwihgwroho;igbiowrbogbo
+104;Cardiologia;Cuida do Coração
+105;Neurologia;Cuida do cérebro
+106;Dermatologia;Cuida da pele
+107;Oftamologia;Cuida do olho

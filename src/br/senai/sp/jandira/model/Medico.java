@@ -22,37 +22,44 @@ public class Medico {
     
     //Contrutores
     
-    public Medico(String crm, String nomeMedico, String telefone, String email, LocalDate dataDeNascimento,ArrayList<Especialidade> especialidades){
-        
-          formatador = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    public Medico(){
+       gerarCodigo();
+   }
+    
+    public Medico(String nome, String telefone, String email, String crm, ArrayList<Especialidade> especialidades, LocalDate dataDeNascimento) {
+
+        formatador = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         dataFormatada = dataDeNascimento.format(formatador);
-        
-        this.crm = crm;
-        this.nomeMedico = nomeMedico;
+
+        this.nomeMedico = nome;
         this.telefoneMedico = telefone;
         this.email = email;
-        this.dataDeNascimento = dataDeNascimento;
-        
+        this.crm = crm;
+        this.especialidades = especialidades;
         gerarCodigo();
     }
     
-    public Medico(Integer codigo, String crm, String nome, String telefone, String email, String dataDeNascimento,ArrayList<Especialidade> especialidades){
+    public Medico(String crm, String nome, String telefone, Integer codigo){
         
         this.crm = crm;
         this.nomeMedico = nome;
         this.telefoneMedico = telefone;
+        this.codigo = codigo;
+        
+    }
+    public Medico(String nome, String telefone, String email, String crm, String dataDeNascimento, Integer codigo, ArrayList<Especialidade> especialidades) {
+
+        this.nomeMedico = nome;
+        this.telefoneMedico = telefone;
         this.email = email;
+        this.crm = crm;
         this.dataFormatada = dataDeNascimento;
         this.especialidades = especialidades;
-    
+        this.codigo = codigo;
+        this.contador = codigo;
         
-        gerarCodigo();
-   }
+    }
     
-   public Medico(){
-       gerarCodigo();
-   }
-   
    public void gerarCodigo(){
        this.contador++;
        this.codigo = contador;
@@ -125,6 +132,10 @@ public class Medico {
     public void setDataFormatada(String dataFormatada) {
         this.dataFormatada = dataFormatada;
     }
+
+    public String getDataFormatada() {
+        return dataFormatada;
+    }
     
     public String arrayParaString(ArrayList<Especialidade> array) {
         ArrayList<String> codigos = new ArrayList<String>();
@@ -138,13 +149,13 @@ public class Medico {
     
     public String getDadosDoMedicoComPontoEVirgula() {
 
-        return this.codigo + ";" 
-                + this.crm + ";" 
-                + this.nomeMedico + ";" 
-                + this.telefoneMedico + ";" 
-                + this.email 
-                + ";" + this.dataFormatada 
-                + ";" + arrayParaString(this.especialidades);
+        return this.codigo + ";"
+                + this.crm + ";"
+                + this.nomeMedico + ";"
+                + this.telefoneMedico + ";"
+                + this.email + ";"
+                + this.dataFormatada + ";"
+                + arrayParaString(this.especialidades);
         
      }
     
